@@ -5,14 +5,17 @@
   "main": "server.ts",
   "scripts": {
     "start": "nodemon src/server.ts",
-    "build": "npx tsc",
+    "tsc": "npx tsc",
     "createdb": "db-migrate db:create item_store",
     "migrate": "db-migrate up",
     "watch": "tsc-watch --onSuccess \"node ./dist/server.js\"",
     "jasmine": "jasmine",
-    "test": "set ENV=test&& db-migrate db:drop item_store_test && db-migrate db:create item_store_test && db-migrate --env test up && npm run build && npm run jasmine && db-migrate db:drop item_store_test",
+    "test": "set ENV=test&& db-migrate db:drop item_store_test && db-migrate db:create item_store_test && db-migrate --env test up && npm run tsc && npm run jasmine && db-migrate db:drop item_store_test",
     "lint": "eslint src/**/*.ts",
-    "prettier": "prettier --config .prettierrc --write src/**/*.ts"
+    "prettier": "prettier --config .prettierrc --write src/**/*.ts",
+    "clean": "rm -rf dist/ || true",
+    "build": "npm install . && npm run clean && npm run tsc && cp -r .elasticbeanstalk dist/.elasticbeanstalk && cp package.json dist/package.json && cd dist && zip -r Archive.zip . && cd ..",
+    "deploy": "npm run build && eb list && eb use Storefrontbackend-env && eb deploy"
   },
   "author": "Udacity",
   "license": "ISC",
