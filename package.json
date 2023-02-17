@@ -4,7 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "frontend:install": "cd store/store-frontend && npm install",
+      "frontend:start": "cd store/store-frontend && npm run start",
+      "frontend:build": "cd store/store-frontend && npm run build",
+      "frontend:test": "cd store/store-frontend && npm run test",
+      "frontend:lint": "cd store/store-frontend && npm run lint",
+      "frontend:deploy": "cd store/store-frontend && npm run deploy",
+      "api:install": "cd store/store-api && npm install .",
+      "api:build": "cd store/store-api && npm run build",
+      "api:start": "cd store/store-api && npm run dev",
+      "api:deploy": "cd store/store-api && npm run deploy"
   },
   "keywords": [],
   "author": "",
